@@ -8,9 +8,20 @@ const bodyParser = require('body-parser');
 const app = express()
 
 // app.use(morgan('combined'))
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(helmet())
 app.use(bodyParser.json())
+
+var whitelist = ['http://example1.com', 'http://example2.com', 'https://russellbot.github.io/']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 app.get('/', (req, res) => {
   res.cookie('session', '1', { httpOnly: true })
