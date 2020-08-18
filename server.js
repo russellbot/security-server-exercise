@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 var winston = require('winston');
 
 const bodyParser = require('body-parser');
 const app = express()
 
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
